@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barra de Busca</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: orange;
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+    }
+
+    .lista-2{
+    width: 90%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    }
+
+    .lista-scroll-2{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px 5px;
+}
+
+.lista-scroll{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 10px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 5px 5px;
+}
+.lista-scroll::-webkit-scrollbar{
+    background: transparent;
+    width: 10px;
+}
+.lista-scroll::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+.lista-scroll::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(rgb(119, 116, 116), rgb(219, 217, 217)); 
+    border-radius: 10px;
+}
+.lista-scroll::-webkit-scrollbar-thumb:hover {
+    background-image: linear-gradient(rgb(221, 216, 216), rgb(85, 82, 82));  
+}
+
+.lista-title{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.livro-2:hover{
+    cursor: pointer;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.livro-2{
+    height: 330px;
+    width: 220px;
+    background-size: 220px 330px;
+    border-radius: 2px;
+    margin-top: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s linear;
+    white-space: nowrap;
+    flex:none;
+}
+  </style>
+</head>
+<body>
+  <form action="/search" method="post">
+    <input type="text" name="search" id="search" placeholder="Digite sua busca" required>
+    <button type="submit">Buscar</button>
+  </form>
+
+  <section class="lista-2">
+    <% if (books.length > 0) { %>
+      <h2 class="lista-title">Livros Encontrados</h2>
+      <div class="lista-scroll-2">
+      <% books.forEach(book => { %>
+        <a href="/livro/<%= book.id %>">
+        <% if (book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail) { %>
+          <img class="livro-2" src="<%= book.volumeInfo.imageLinks.thumbnail %>">
+        <% } else { %>
+          <img class="livro-2" src="https://missingpersons.icrc.org/sites/default/files/2021-11/00000_book.jpg">
+        <% } %>
+        </a>
+        <br>
+        <h1><%= book.volumeInfo.title %></h1>
+    <% }) }else { %>
+      <p class="p-semLivro">Não há livros no banco de dados, por favor adicione</p>
+    <% } %>
+      </div>
+  </section>
+
+</body>
+</html>
