@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.get("/teste", BookController.selecionaLivro);
 app.post("/search", BookController.buscaLivro);
+app.get("/livro/:bookId", BookController.detalhaLivro);
 
 app.get('/', function (req, res) {
     res.render('home');
