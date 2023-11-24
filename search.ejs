@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>Barra de Busca</title>
+</head>
+<body>
+  <form action="/search" method="post">
+    <input type="text" name="search" id="search" placeholder="Digite sua busca" required>
+    <button type="submit">Buscar</button>
+  </form>
+
+  <section class="lista-2">
+    <% if (books.length > 0) { %>
+      <h2 class="lista-title">Livros Encontrados</h2>
+      <div class="lista-scroll-2">
+      <% books.forEach(book => { %>
+        <a href="/livro/<%= book.id %>">
+        <% if (book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail) { %>
+          <img class="livro-2" src="<%= book.volumeInfo.imageLinks.thumbnail %>">
+        <% } else { %>
+          <img class="livro-2" src="https://missingpersons.icrc.org/sites/default/files/2021-11/00000_book.jpg">
+        <% } %>
+        </a>
+        <br>
+        <h1><%= book.volumeInfo.title %></h1>
+    <% }) }else { %>
+      <p class="p-semLivro">Não há livros no banco de dados, por favor adicione</p>
+    <% } %>
+      </div>
+  </section>
+
+</body>
+</html>
