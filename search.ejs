@@ -10,11 +10,11 @@
   <form action="/search" method="post">
     <input type="text" name="search" id="search" placeholder="Digite sua busca" required>
     <button type="submit">Buscar</button>
+    <h2 class="lista-title">Livros Encontrados</h2>
   </form>
 
   <section class="lista-2">
     <% if (books.length > 0) { %>
-      <h2 class="lista-title">Livros Encontrados</h2>
       <div class="lista-scroll-2">
       <% books.forEach(book => { %>
         <a href="/livro/<%= book.id %>">
